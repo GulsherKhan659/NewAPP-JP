@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644383535389",
+    "project_id": "newsapp-jp",
+    "storage_bucket": "newsapp-jp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644383535389:android:3d9fc512957e914ba531f4",
+        "android_client_info": {
+          "package_name": "com.example.new_app_with_api"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644383535389-8cp413bi14q4q09spmvsu7keckps944v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1bkGL-7j38q_DzkaduGMlqbOLjBdX0DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644383535389-8cp413bi14q4q09spmvsu7keckps944v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

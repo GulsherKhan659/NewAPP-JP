@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/auth/authentication.dart';
 import '/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  Authentication auth = Authentication();
+
   Widget _backButton() {
     return InkWell(
       onTap: () {},
@@ -34,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
+  Widget _entryField(String title, TextEditingController controller,
+      {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -60,8 +66,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton() {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => Home()));
+      onTap: () async {
+        if (nameController.text.isNotEmpty && passController.text.isNotEmpty) {
+          var user = await auth.signInUserInFireBase(
+              email: nameController.text, password: passController.text);
+          if (user!.uid.isNotEmpty) {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => Home()));
+          }
+        } else {}
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -229,8 +242,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
-        _entryField("Password", isPassword: true),
+        _entryField("Email id", nameController),
+        _entryField("Password", passController, isPassword: true),
       ],
     );
   }
@@ -267,9 +280,6 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
-                  _divider(),
-                  _facebookButton(),
-                  SizedBox(height: height * .055),
                   _createAccountLabel(),
                 ],
               ),
